@@ -1,0 +1,56 @@
+.snap-content {
+    background-color: lightgray;
+    border-left: 1px solid #ccc;
+    overflow:hidden;
+}
+snap-drawer {
+    padding:10px;   
+}
+snap-drawer i {
+ color:red;   
+}
+snap-content > header {
+    width:100%;
+    padding:10px;
+    color:white;
+    font-size:30px;
+}
+snap-content > header h2 {
+    margin-top: 0;   
+}
+snap-content > header .editable {
+    color: white !important; 
+    cursor:pointer;
+}
+h4 a .popover {
+    font-size: 14px; 
+    color: black;
+}
+.growl {
+    z-index:9999;
+}
+
+.tag {
+    margin: 0 3px;   
+}
+.tag:first-child {
+    margin: 0 3px 0 0;   
+}
+.masonry-brick {
+    
+}
+.masonry-brick .thumbnail {
+    margin:15px 0;   
+}
+#bookmark-content {
+    overflow:auto;   
+}
+.tag-item {
+    line-height: 30px;
+    padding: 3px 0px 3px 3px;   
+    border-radius: 5px;
+    margin: 2px 0;
+}
+.tag-item:hover {
+    background: lightblue;
+}
