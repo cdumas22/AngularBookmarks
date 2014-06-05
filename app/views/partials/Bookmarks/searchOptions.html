@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Search Options</div>
+    <div class="panel-body">
+        <dl>
+            <dt>Search Text</dt>
+            <dd>
+                <a editable-text="search.text" buttons="no">
+                    {{search.text || 'No Search Text'}} 
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>Sort by</dt>
+            <dd>
+                <a  href="#" editable-select="search.sorting" buttons="no" e-ng-options="s for s in ['title','description','count','created']">
+                    {{search.sorting || "..."}}
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>Direction</dt>
+            <dd>
+                <a  href="#" editable-select="search.sortAsc" buttons="no" e-ng-options="s.value as s.text for s in [{value:false,text:'Ascending'},{value:true,text:'Descending'}]">    
+                    {{!search.sortAsc ? "Ascending" : "Descending"}}
+                </a>
+            </dd>
+        </dl>
+        <dl class="">
+            <dt>Search Field</dt>
+            <dd>
+                <a class="filter-select" href="#" editable-select="search.field" buttons="no" e-ng-options="s for s in ['All','title','description','tags']">
+                    {{search.field}}
+                </a>
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt><label for="search-exact-options">Exact Match</label></dt>
+          <dd><input id="search-exact-options" type="checkbox" ng-model="search.exact"/></dd>
+        </dl>
+        <button class="btn btn-defualt btn-block" ng-click="resetSearch()"><i class="fa fa-undo"> Reset Search</i></button>
+    </div>
+</div>

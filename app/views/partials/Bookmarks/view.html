@@ -1,0 +1,60 @@
+<form class="form-horizontal" role="form">
+    <div class="modal-header">
+        <h4 class="bookmarkName">
+            <a ng-click="incrementCounter(item)" href="{{item.url}}" target="_blank">
+                <span class="badge pull-right">{{item.count}}</span>
+                <span >{{item.title}}</span>
+            </a>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+          <dt>Description</dt>
+          <dd>{{item.description || "no description"}}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>URL</dt>
+          <dd><a href="{{item.url}}" target="_blank" ng-click="incrementCounter(item)">{{item.url || "no url"}}</a></dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Tags</dt>
+          <dd><span ng-repeat="tag in item.tags" style="margin-bottom:3px" class="tag label label-info pull-left">{{tag.title}}</span></dd>
+        </dl>
+        <p class="clearfix"></p>
+        <dl class="dl-horizontal">
+          <dt>Shared With</dt>
+          <dd><span ng-repeat="share in item.shares" style="margin-bottom:3px" class="tag label label-info pull-left">{{share.email}}</span></dd>
+        </dl>
+        <p class="clearfix"></p>
+         
+        <p>
+            <span class="label label-default">Created: {{item.created | date:'mediumTime'}}</span>
+            <span class="label label-default">Updated: {{item.updated | date:'mediumTime'}}</span>
+        </p>
+        <p>
+            <span class="label label-primary">Owner: {{item.user.name}}</span>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <div ng-if="owner(item, currentUser)" class="btn-group btn-group-sm btn-group-justified ">
+            <a type="button" class="btn btn-primary" ng-click="editItem(item)">
+                <i class="fa fa-pencil"></i> Edit
+            </a>
+            <a type="button" class="btn btn-danger" ng-confirm-message="Are you sure you want to delete the bookmark?"
+ng-confirm-click="removeItem(item)">
+                <i class="fa fa-ban"></i> Remove
+            </a>
+            <a type="button" class="btn btn-default" ng-click="close()">
+                <i class="fa fa-times"></i> Close
+            </a>
+        </div>
+        <div ng-if="!owner(item, currentUser)" class="btn-group btn-group-sm btn-group-justified ">
+            <a type="button" class="btn btn-danger" ng-confirm-message="You sure you want to stop following this bookmark?" ng-confirm-click="removeFollowing(item)">
+                <i class="fa fa-ban"></i> Stop Following
+            </a>
+            <a type="button" class="btn btn-default" ng-click="close()">
+                <i class="fa fa-times"></i> Close
+            </a>
+        </div>
+    </div>
+</form>

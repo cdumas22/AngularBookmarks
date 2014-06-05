@@ -1,11 +1,9 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!DOCTYPE html>
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
     <base href="/">
     <title></title>
     <meta name="description" content="">
@@ -17,14 +15,17 @@
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
     <link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angular-hotkeys/build/hotkeys.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/angular-growl/build/angular-growl.min.css" />
     <link href="Libraries/tags/ng-tags-input.css" rel="stylesheet"/>
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
   <body ng-app="bookmarksApp">
+      <div growl></div>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -51,7 +52,7 @@
     <!-- build:js(app) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -79,12 +80,16 @@
     <script src="bower_components/imagesloaded/imagesloaded.js"></script>
     <script src="bower_components/angular-masonry/angular-masonry.js"></script>
     <script src="bower_components/angular-growl/build/angular-growl.js"></script>
+    <script src="bower_components/hammerjs/hammer.js"></script>
+    <script src="bower_components/angular-hammer/angular-hammer.js"></script>
+    <script src="bower_components/mousetrap/mousetrap.js"></script>
+    <script src="bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
         
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script src="Libraries/draganddrop.js"></script>
         <script src="Libraries/tags/ng-tags-input.js"></script>
         <script src="scripts/app.js"></script>
@@ -96,7 +101,17 @@
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/session.js"></script>
         <script src="scripts/services/user.js"></script>
+      <script src="scripts/services/resourcemanager.js"></script>
         <script src="scripts/directives/mongooseError.js"></script>
+        
+        <script src="scripts/controllers/bookmark.js"></script>
+        <script src="scripts/controllers/tag.js"></script>
+        <script src="scripts/services/tagapi.js"></script>
+        <script src="scripts/services/bookmarkapi.js"></script>
+        <script src="scripts/directives/resize.js"></script>
+        <script src="scripts/directives/ngconfirmclick.js"></script>
+        <script src="scripts/directives/httpprefix.js"></script>
+        <script src="scripts/directives/popupoptions.js"></script>
         <!-- endbuild -->
 </body>
 </html>

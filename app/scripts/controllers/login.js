@@ -15,7 +15,7 @@ angular.module('bookmarksApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $location.path('/app');
         })
         .catch( function(err) {
           err = err.data;

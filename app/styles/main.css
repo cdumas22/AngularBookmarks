@@ -6,14 +6,12 @@
 snap-drawer {
     padding:10px;   
 }
-snap-drawer i {
- color:red;   
-}
+
 snap-content > header {
     width:100%;
-    padding:10px;
+    padding:4px;
     color:white;
-    font-size:30px;
+    font-size:23px;
 }
 snap-content > header h2 {
     margin-top: 0;   
@@ -40,7 +38,10 @@ h4 a .popover {
     
 }
 .masonry-brick .thumbnail {
-    margin:15px 0;   
+    margin:7px 0;   
+}
+.bookmark-item {
+    padding: 0 7px;
 }
 #bookmark-content {
     overflow:auto;   
@@ -53,4 +54,23 @@ h4 a .popover {
 }
 .tag-item:hover {
     background: lightblue;
+}
+.filter-select {
+    color:black;
+    font-size:14px;
+    font-weight:bold;
+}
+.reset-search:hover {
+    color:white;
+}
+
+.tag-edit-options {
+    position:absolute;
+    right:-191px;
+    top:2px;
+    transition: right 0.3s ease-in;
+    
+}
+.tag-edit-options.edit {
+    right:3px;
 }

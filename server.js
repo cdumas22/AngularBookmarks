@@ -4,9 +4,6 @@ var express = require('express'),
     path = require('path'),
     fs = require('fs'),
     mongoose = require('mongoose');
-var datastore = require('nedb');
-tagdb = new datastore({filename: 'db/tags.db', autoload:true});
-bookmarkdb = new datastore({filename: 'db/bookmarks.db', autoload:true});
 /**
  * Main application file
  */

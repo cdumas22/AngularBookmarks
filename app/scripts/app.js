@@ -4,7 +4,19 @@ angular.module('bookmarksApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute','xeditable','snap','angular-growl', 'ui.bootstrap','ngAnimate','ngDragDrop', 'ngTouch', 'ngResource', 'ngTagsInput', 'wu.masonry'
+  'ngRoute',
+  'xeditable',
+  'snap',
+  'angular-growl', 
+  'ui.bootstrap',
+  'ngAnimate',
+  'ngDragDrop', 
+  'ngTouch', 
+  'ngResource',
+  'ngTagsInput', 
+  'wu.masonry',
+  'hmTouchEvents',
+  'cfp.hotkeys'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider, growlProvider) {
     growlProvider.globalTimeToLive(3000);
@@ -12,7 +24,24 @@ angular.module('bookmarksApp', [
     
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/main'
+        templateUrl: 'partials/main',
+        controller: 'MainCtrl'
+      })
+      .when('/app', {
+        templateUrl: 'partials/Bookmarks/bookmarks',
+        controller: 'BookmarkCtrl',
+        hotkeys: [
+            ['alt+shift+f', 'Focus on Search Field', 'showSearchField()'],
+            ['alt+r', 'Reset Search', 'resetSearch()'],
+            ['alt+shift+r', 'Reset Display Fields', 'resetDisplay()'],
+            ['alt+n', 'Create New Bookmark', 'newItem()'],
+            ['alt+up', 'Sort Ascending', 'sortAsc(true)'],
+            ['alt+down', 'Sort Descending', 'sortAsc(false)'],
+            ['alt+t', 'Sort By Title', 'sortBy("title")'],
+            ['alt+shift+d', 'Sort By Description', 'sortBy("description")'],
+            ['alt+v', 'Sort By Visit Count', 'sortBy("count")'],
+            ['alt+c', 'Sort Create Date', 'sortBy("created")']        
+        ]
       })
       .when('/login', {
         templateUrl: 'partials/login',

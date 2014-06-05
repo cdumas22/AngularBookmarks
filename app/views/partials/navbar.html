@@ -1,7 +1,11 @@
-<div class="header" ng-controller="NavbarCtrl">
-  <ul class="nav nav-pills pull-right">
-    <li ng-hide="currentUser" ng-class="{active: isActive('/login')}"><a class="btn btn-default btn-sm" href="/login">Login</a></li>
-    <li ng-hide="currentUser" ng-class="{active: isActive('/signup')}"><a class="btn btn-default btn-sm" href="/signup">Sign up</a></li>
-    <li ng-show="currentUser" ng-class="{active: isActive('/logout')}"><a class="btn btn-default btn-sm" href="" ng-click="logout()">Logout</a></li>
+
+
+<nav class="navbar navbar-default" role="navigation" ng-controller="NavbarCtrl">
+  <ul class="nav navbar-nav">
+    <li ng-hide="currentUser" ng-class="{active: isActive('/login')}"><a class="" href="/login">Login</a></li>
+    <li ng-hide="currentUser" ng-class="{active: isActive('/signup')}"><a class="" href="/signup">Sign up</a></li>
+    <li ng-show="currentUser" ng-class="{active: isActive('/app')}"><a class="" href="/app">App</a></li>
+    <li ng-show="currentUser" ng-class="{active: isActive('/settings')}"><a class="" href="/settings">Settings</a></li>
+    <li ng-show="currentUser" ng-class="{active: isActive('/logout')}"><a class="" href="" ng-click="logout()">Logout</a></li>
   </ul>
-</div>
+</nav>

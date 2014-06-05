@@ -1,0 +1,64 @@
+<section>
+    <snap-drawers>
+        <snap-drawer ng-include="'partials/tags'"></snap-drawer>
+        <div snap-drawer="right" class="container">
+            <h1><span ng-show="currentUser">{{ currentUser.name }}</span></h1>
+            <div ng-include="'partials/Bookmarks/navbar'"></div>
+            <br/>
+            <button class="btn btn-primary btn-block" ng-click="newItem()">Add New Bookmark</button>
+            <br/>
+            <div ng-include="'partials/Bookmarks/searchOptions'"></div>
+            <div ng-include="'partials/Bookmarks/fieldOptions'"></div>
+            <div class="well">
+                type <span class="label label-info">?</span> to see keyboard shortcuts
+            </div>
+        </div>
+    </snap-drawers>
+    <snap-content>
+        <header class="navbar-inverse navbar-collapse text-center">
+            <i class="fa fa-bars open-sidebar navbar-header pull-left" snap-toggle="left"></i>
+            <span editable-text="search.text" buttons="no" id="main-search" e-form="mainSearchField" >
+                {{search.text || 'Bookmarks'}} 
+            </span>
+            <i class="fa fa-search" ng-click="showSearchField()" ng-hide="mainSearchField.$visible"></i>
+            <i class="fa fa-bars open-sidebar navbar-header pull-right" snap-toggle="right"></i>
+        </header>
+        <section id="bookmark-content" resize ng-style="style()" >
+            <div masonry masonry-options="{ transitionDuration: '0s' }" id="content-table" load-images="false">
+                <div class="masonry-brick col-lg-2 col-md-2 col-sm-4 bookmark-item" ng-repeat="item in items | filter:filterBy():search.exact | orderBy:search.sorting:search.sortAsc track by $index" ui-on-Drop="onDrop($event,$data,item)"
+                     >
+                    <div class="thumbnail" ng-click="viewDetails(item)" >
+                        <div class="caption"  >
+                            <h4 class="bookmarkName">
+                                <a ng-click="incrementCounter(item)" href="{{item.url}}" target="_blank">
+                                    <span ng-if="display.visits" class="badge pull-right">{{item.count}}</span>
+                                    
+                                    <span ng-if="display.title">{{item.title}}</span>
+                                </a>
+                            </h4>
+                            <p ng-if="display.description">{{item.description}}</p>
+                            <div class="clearfix" ng-if="display.tags" >
+                                <div ng-repeat="tag in item.tags" style="margin-bottom:3px" class="tag label label-info pull-left">{{tag.title}}</div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="clearfix" ng-if="display.shares" >
+                                <div ng-repeat="share in item.shares" style="margin-bottom:3px" class="tag label label-warning pull-left">
+                                    {{share.email}}
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <p ng-if="display.updated">
+                                <span class="label label-default">Created: {{item.created | date:'mediumTime'}}</span>
+                                <br/>
+                                <span class="label label-default">Updated: {{item.updated | date:'mediumTime'}}</span>
+                            </p>
+                            <p ng-if="display.owner">
+                                <span class="label label-primary">Owner: {{item.user.name}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </snap-content>
+</section>

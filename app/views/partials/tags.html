@@ -1,0 +1,37 @@
+<div ng-controller="TagCtrl" >
+    <h1>Tags</h1>
+    <header>
+        <form ng-submit="addItem()">
+            <div class="input-group">
+                <label class="sr-only">Add New Tag</label>
+                <input type="text" class="form-control" ng-model="newItem" placeholder="Tag Name">
+                
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </span>
+            </div>
+        </form>
+    </header>
+    <br/>
+    <section>
+        <ul class="list-unstyled" style="overflow-x:hidden;">
+            <li class="tag-item" style="position:relative;" ng-repeat="item in items track by $index" ui-draggable="true" drag="item">
+                <span class="badge">{{countBookmarksWithTag(item)}}</span>
+                <span ng-click="search(item)" editable-text="item.title" buttons="no" e-form="textBtnForm" onaftersave="update(item)">
+                    {{item.title}}
+                </span>
+                <a class="badge pull-right" ng-click="item.edit=true" style="margin:6px;" ng-hide="textBtnForm.$visible"><i class="fa fa-gear" ></i></a>
+                <div ng-class="{edit: item.edit}" class="tag-edit-options">
+                    <button class="btn btn-danger btn-sm" ng-confirm-message="Are you sure you want to delete this Tag?"
+    ng-confirm-click="removeItem($index)">Delete</button>
+                    
+                    <button class="btn btn-primary btn-sm" ng-click="textBtnForm.$show();item.edit=false;">
+                        edit
+                    </button>
+                    <button class="btn btn-default btn-sm" ng-click="item.edit=false">Cancel</button>
+                </div>
+                
+            </li>
+        </ul>
+    </section>
+</div>

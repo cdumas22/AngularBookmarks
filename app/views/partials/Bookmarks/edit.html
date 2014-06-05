@@ -1,0 +1,39 @@
+<form class="form-horizontal" role="form">
+    <div class="modal-header">
+        <h3 class="modal-title">{{item.title || "Create New Bookmark"}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <input id="name" type="text" class="form-control" ng-model="item.title" placeholder="Bookmark Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea id="description" class="form-control" ng-model="item.description" placeholder="Bookmark Description"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="url" class="col-sm-2 control-label">URL</label>
+            <div class="col-sm-10">
+                <input id="url" type="text" class="form-control" ng-model="item.url" placeholder="Bookmark URL" http-prefix>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Tags</label>
+            <tags-input ng-model="item.tags" display-property="title" add-from-autocomplete-only="true">
+                <auto-complete min-length="1" source="loadTags($query)"></auto-complete>
+            </tags-input>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Share With</label>
+            <tags-input ng-model="item.shares" placeholder="email" allowed-tags-pattern=".*@.*\..*" display-property="email"></tags-input>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="changed()" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
