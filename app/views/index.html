@@ -84,12 +84,14 @@
     <script src="bower_components/angular-hammer/angular-hammer.js"></script>
     <script src="bower_components/mousetrap/mousetrap.js"></script>
     <script src="bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
         
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="Libraries/socket.io.js"></script>
         <script src="Libraries/draganddrop.js"></script>
         <script src="Libraries/tags/ng-tags-input.js"></script>
         <script src="scripts/app.js"></script>
@@ -101,7 +103,6 @@
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/session.js"></script>
         <script src="scripts/services/user.js"></script>
-      <script src="scripts/services/resourcemanager.js"></script>
         <script src="scripts/directives/mongooseError.js"></script>
         
         <script src="scripts/controllers/bookmark.js"></script>
@@ -112,6 +113,9 @@
         <script src="scripts/directives/ngconfirmclick.js"></script>
         <script src="scripts/directives/httpprefix.js"></script>
         <script src="scripts/directives/popupoptions.js"></script>
+        <script src="scripts/services/socket.js"></script>
+        <script src="scripts/services/bookmarkmanager.js"></script>
+        <script src="scripts/services/tagmanager.js"></script>
         <!-- endbuild -->
 </body>
 </html>
