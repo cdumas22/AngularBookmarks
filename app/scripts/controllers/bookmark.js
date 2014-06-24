@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bookmarksApp')
-    .controller('BookmarkCtrl', function ($scope, $rootScope,growl, $modal, $swipe, Resourcemanager) {
+    .controller('BookmarkCtrl', function ($scope, $rootScope,growl, $modal, $swipe, BookmarkManager) {
         var emptyItem = { 
             title: "", 
             description:"",
@@ -30,7 +30,7 @@ angular.module('bookmarksApp')
             exact: false
         };
         
-        $scope.items = Resourcemanager.getBookmarks();
+        $scope.items = BookmarkManager.getBookmarks();
     
         $scope.$watch('search', function() { $scope.$broadcast('masonry.reload');  }, true);
         $scope.$watch('display', function() { $scope.$broadcast('masonry.reload');  }, true);
@@ -54,7 +54,7 @@ angular.module('bookmarksApp')
             if(!_.find(bookmark.tags, function(tag) {return tag.title === $data.title;}) && 
                $rootScope.currentUser._id === bookmark.user._id){
                 bookmark.tags.push($data);
-                Resourcemanager.updateBookmark(bookmark).$promise.then(function(resp) {
+                BookmarkManager.updateBookmark(bookmark).$promise.then(function(resp) {
                     $scope.$broadcast('masonry.reload'); 
                     growl.addSuccessMessage("Added Tag: " + $data.title + " to " + resp.title);
                 });
@@ -96,7 +96,7 @@ angular.module('bookmarksApp')
                     }
                 }
             }).result.then(function(obj){
-                 Resourcemanager.createBookmark(obj.newItem).$promise.then(function(resp){
+                 BookmarkManager.createBookmark(obj.newItem).$promise.then(function(resp){
                     $scope.$broadcast('masonry.reload'); 
                     growl.addSuccessMessage("Created Item: " + resp.title);
                  });
@@ -106,17 +106,17 @@ angular.module('bookmarksApp')
         $scope.incrementCounter = function(item) {
             if($rootScope.currentUser._id === bookmark.user._id) {
                 item.count += 1;
-                Resourcemanager.updateBookmark(item).$promise.then(function(resp) {
+                BookmarkManager.updateBookmark(item).$promise.then(function(resp) {
                     growl.addSuccessMessage(resp.count + " visits for: " + resp.title);    
                 });
             }
         };
     })
-    .controller("EditBookmarkModalController", function($scope, $modalInstance, Resourcemanager, item) {
+    .controller("EditBookmarkModalController", function($scope, $modalInstance, TagManager, item) {
         $scope.item = angular.copy(item);
         
         $scope.loadTags = function($query){
-            return Resourcemanager.resources.tags.$promise;
+            return TagManager.tags.$promise;
         }
         
         $scope.changed = function() {
@@ -131,7 +131,7 @@ angular.module('bookmarksApp')
         
         $scope.cancel = $modalInstance.dismiss;
     })
-    .controller("ViewBookmarkModalController", function($scope, $rootScope, $modal, $modalInstance, growl, Resourcemanager, item) {
+    .controller("ViewBookmarkModalController", function($scope, $rootScope, $modal, $modalInstance, growl, BookmarkManager, item) {
         $scope.item = item;
 
         $scope.owner = function(bookmark, user) {
@@ -140,13 +140,13 @@ angular.module('bookmarksApp')
         
         $scope.incrementCounter = function(item) {
             item.count += 1;
-            Resourcemanager.updateBookmark(item).$promise.then(function(resp) {
+            BookmarkManager.updateBookmark(item).$promise.then(function(resp) {
                 growl.addSuccessMessage(resp.count + " visits for: " + resp.title);    
             });
         };
         
         $scope.removeFollowing = function(bookmark) {
-            Resourcemanager.removeFollowing(bookmark, $rootScope.currentUser).success(function(){
+            BookmarkManager.removeFollowing(bookmark, $rootScope.currentUser).success(function(){
                 $scope.$broadcast('masonry.reload'); 
                 growl.addErrorMessage("Stopped following bookmark");
                 $modalInstance.close();
@@ -154,7 +154,7 @@ angular.module('bookmarksApp')
         };
         
         $scope.removeItem = function (bookmark) {
-            Resourcemanager.removeBookmark(bookmark).$promise.then(function(){
+            BookmarkManager.removeBookmark(bookmark).$promise.then(function(){
                 $scope.$broadcast('masonry.reload'); 
                 growl.addErrorMessage("Deleted bookmark");
                 $modalInstance.close();
@@ -171,7 +171,7 @@ angular.module('bookmarksApp')
                     }
                 }
             }).result.then(function(result){
-                Resourcemanager.updateBookmark(result.newItem).$promise.then(function(resp) {
+                BookmarkManager.updateBookmark(result.newItem).$promise.then(function(resp) {
                     $scope.$broadcast('masonry.reload'); 
                     growl.addSuccessMessage("Updated Item: " + resp.title);
                 });

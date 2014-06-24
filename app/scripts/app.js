@@ -16,7 +16,8 @@ angular.module('bookmarksApp', [
   'ngTagsInput', 
   'wu.masonry',
   'hmTouchEvents',
-  'cfp.hotkeys'
+  'cfp.hotkeys',
+  'btford.socket-io'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider, growlProvider) {
     growlProvider.globalTimeToLive(3000);
