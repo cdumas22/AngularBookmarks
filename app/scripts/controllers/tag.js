@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('bookmarksApp')
-  .controller('TagCtrl', function ($scope, $rootScope, growl, Resourcemanager) {
-        $scope.items =  Resourcemanager.resources.tags;
+  .controller('TagCtrl', function ($scope, $rootScope, growl, TagManager) {
+        $scope.items =  TagManager.tags;
         $scope.search = function(item) {
             $rootScope.search = angular.extend($rootScope.search, {text: item.title, field: 'tags', exact: true});
         }
         $scope.newItem = "";
-        $scope.countBookmarksWithTag = Resourcemanager.countBookmarksWithTag;
+        $scope.countBookmarksWithTag = TagManager.countBookmarksWithTag;
         $scope.addItem = function() {
             if(_.find($scope.items, function(t) {
                    return t.title === $scope.newItem;
@@ -17,7 +17,7 @@ angular.module('bookmarksApp')
             else if($scope.newItem.toString().length <= 0){
                 growl.addErrorMessage("Tag Title Required");
             } else {
-                Resourcemanager.createTag({title: $scope.newItem}).$promise.then(function(resp){ 
+                TagManager.createTag({title: $scope.newItem}).$promise.then(function(resp){ 
                     growl.addSuccessMessage("Created Tag:" + resp.title);
                 }).finally(function(){
                     $scope.newItem = "";    
@@ -25,12 +25,12 @@ angular.module('bookmarksApp')
             }
         };
         $scope.update = function(item) {
-            Resourcemanager.updateTag(item).$promise.then(function(resp) {
+            TagManager.updateTag(item).$promise.then(function(resp) {
                 growl.addSuccessMessage("Updated Tag: " + resp.title);  
             });
         };
         $scope.removeItem = function (index) {
-            Resourcemanager.removeTag(index).$promise.then(function() {
+            TagManager.removeTag(index).$promise.then(function() {
                 growl.addErrorMessage("Deleted Tag");
             });
         };
