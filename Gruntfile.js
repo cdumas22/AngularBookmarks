@@ -286,7 +286,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.tmp/concat/scripts',
           src: '*.js',
-          dest: '.tmp/concat/scripts'
+          dest: 'dist/public/scripts'
         }]
       }
     },
@@ -332,7 +332,13 @@ module.exports = function (grunt) {
             'server.js',
             'lib/**/*'
           ]
-        }]
+        }, {
+			expand: true,
+			dot: true,
+			cwd: 'app/bower_components/font-awesome/fonts/',
+			src: ['*.*'],
+			dest: 'dist/public/fonts'
+		}]
       },
       styles: {
         expand: true,

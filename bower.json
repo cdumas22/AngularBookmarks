@@ -36,6 +36,6 @@
   },
   "testPath": "test/client/spec",
   "resolutions": {
-    "angular": "1.3.0-build.2803+sha.ebf59b4"
+    "angular": ">=1.2.*"
   }
 }
